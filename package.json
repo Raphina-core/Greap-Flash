@@ -1,4 +1,5 @@
 {
+  "publisher": "Raphina-core-12",
   "name": "greapflash",
   "displayName": "GreapFlash",
   "description": "Búsqueda difusa con ranking dentro del archivo activo de VS Code",
