@@ -3,7 +3,7 @@
   "name": "greapflash",
   "displayName": "GreapFlash",
   "description": "Búsqueda difusa con ranking dentro del archivo activo de VS Code",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "icon": "greapflash-icon.png",
   "engines": {
     "vscode": "^1.138.0"
@@ -45,6 +45,6 @@
   },
   "repository": {
   "type": "git",
-  "url": "https://github.com/Raphina-core-12/Greap-Flash.git"
+  "url": "https://github.com/Raphina-core/Greap-Flash.git"
 }
 }

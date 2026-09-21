@@ -39,7 +39,7 @@ GreapFlash resuelve ese caso específico: escribes lo que recuerdas, aunque sea 
 ## Instalar y desarrollar
 
 Url del repositorio de GitHub (Proyecto):
-https://github.com/Raphina-core-12/Greap-Flash.git
+https://github.com/Raphina-core/Greap-Flash.git
 
 \`\`\`bash
 git clone <tu-repo>
