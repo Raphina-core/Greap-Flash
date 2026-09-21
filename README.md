@@ -38,6 +38,9 @@ GreapFlash resuelve ese caso específico: escribes lo que recuerdas, aunque sea 
 
 ## Instalar y desarrollar
 
+Url del repositorio de GitHub (Proyecto):
+https://github.com/Raphina-core-12/Greap-Flash.git
+
 \`\`\`bash
 git clone <tu-repo>
 cd greapflash
@@ -45,6 +48,14 @@ npm install
 npm run compile
 \`\`\`
 Presiona F5 en VS Code para probar en un Extension Development Host.
+
+## Creditos
+
+<a href="https://www.flaticon.es/iconos-gratis/uva" title="uva iconos">Uva iconos creados por Magnific - Flaticon</a>
+
+<a href="https://www.flaticon.es/iconos-gratis/rayo" title="rayo iconos">Rayo iconos creados por Febrian Hidayat - Flaticon</a>
+
+Muchas gracias a los de Flaticon, por permitirme usar sus iconos en mi logo.
 
 ## Licencia
 
