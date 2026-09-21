@@ -59,4 +59,4 @@ Muchas gracias a los de Flaticon, por permitirme usar sus iconos en mi logo.
 
 ## Licencia
 
-MIT (o Apache 2.0 — igual que HyperSearch, si quieres que sea compatible con integrarse a otros proyectos open source más adelante).
+MIT License — texto completo en LICENSE, en la raíz del proyecto.

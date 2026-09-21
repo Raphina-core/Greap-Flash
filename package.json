@@ -3,7 +3,7 @@
   "name": "greapflash",
   "displayName": "GreapFlash",
   "description": "Búsqueda difusa con ranking dentro del archivo activo de VS Code",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "icon": "greapflash-icon.png",
   "engines": {
     "vscode": "^1.138.0"
