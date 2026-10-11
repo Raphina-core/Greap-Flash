@@ -3,7 +3,7 @@
   "name": "greapflash",
   "displayName": "GreapFlash",
   "description": "Búsqueda difusa con ranking dentro del archivo activo de VS Code",
-  "version": "0.0.6",
+  "version": "1.0.1",
   "icon": "greapflash-icon.png",
   "engines": {
     "vscode": "^1.138.0"
@@ -15,10 +15,10 @@
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
-      {
-        "command": "greapflash.helloWorld",
-        "title": "Hello World"
-      }
+      { "command": "greapflash.search", "title": "GreapFlash: Buscar en archivo actual" }
+    ],
+    "keybindings": [
+      { "command": "greapflash.search", "key": "ctrl+alt+g", "mac": "cmd+alt+g", "when": "editorTextFocus" }
     ]
   },
   "scripts": {

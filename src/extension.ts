@@ -1,26 +1,55 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
+import { SearchEngine } from './search/searchEngine';
 
-// This method is called when your extension is activated
-// Your extension is activated the very first time the command is executed
-export function activate(context: vscode.ExtensionContext) {
+type Item = vscode.QuickPickItem & { line: number };
+let cache: { uri: string; version: number; engine: SearchEngine } | undefined;
 
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "greapflash" is now active!');
-
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	const disposable = vscode.commands.registerCommand('greapflash.helloWorld', () => {
-		// The code you place here will be executed every time your command is executed
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from GreapFlash!');
-	});
-
-	context.subscriptions.push(disposable);
+function getEngine(doc: vscode.TextDocument): SearchEngine {
+  const uri = doc.uri.toString();
+  if (cache?.uri === uri && cache.version === doc.version) return cache.engine;
+  const lines = Array.from({ length: doc.lineCount }, (_, i) => doc.lineAt(i).text);
+  cache = { uri, version: doc.version, engine: new SearchEngine(lines) };
+  return cache.engine;
 }
 
-// This method is called when your extension is deactivated
+export function activate(context: vscode.ExtensionContext) {
+  context.subscriptions.push(
+    vscode.commands.registerCommand('greapflash.search', () => {
+      const editor = vscode.window.activeTextEditor;
+      if (!editor) return;
+
+      const engine = getEngine(editor.document);
+      const original = editor.selection;
+      const qp = vscode.window.createQuickPick<Item>();
+      qp.placeholder = 'Escribe lo que recuerdes…';
+
+      const reveal = (line: number) => {
+        const pos = new vscode.Position(line, 0);
+        editor.selection = new vscode.Selection(pos, pos);
+        editor.revealRange(new vscode.Range(pos, pos), vscode.TextEditorRevealType.InCenterIfOutsideViewport);
+      };
+
+      qp.onDidChangeValue(value => {
+        qp.items = engine.search(value).map(r => ({
+          label: `${r.isComment ? '$(comment) ' : ''}${engine.lines[r.line].trim()}`,
+          description: `L${r.line + 1}`,
+          line: r.line,
+          alwaysShow: true,   // IMPORTANTE: si no, VS Code vuelve a filtrar por su cuenta
+        }));
+      });
+
+      qp.onDidChangeActive(items => { if (items[0]) reveal(items[0].line); }); // vista previa
+      let accepted = false;
+      qp.onDidAccept(() => { accepted = true; qp.hide(); });
+      qp.onDidHide(() => {
+        if (accepted && qp.activeItems[0]) reveal(qp.activeItems[0].line);
+        else editor.selection = original;
+        qp.dispose();
+      });
+
+      qp.show();
+    }),
+  );
+}
+
 export function deactivate() {}
