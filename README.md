@@ -59,12 +59,12 @@ Actualmente y a dia de hoy que este viendo esto, aun ahi unas cosas que faltan p
 Url del repositorio de GitHub (Proyecto):
 https://github.com/Raphina-core/Greap-Flash.git
 
-\`\`\`bash
+```bash
 git clone https://github.com/Raphina-core/Greap-Flash.git
 cd Greap-Flash
 npm install
 npm run compile
-\`\`\`
+```
 Presiona F5 en VS Code para probar en un Extension Development Host.
 
 ## Creditos

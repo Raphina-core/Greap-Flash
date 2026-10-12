@@ -2,6 +2,7 @@ import { tokenize } from './tokenizer';
 import { InvertedIndex } from './invertedIndex';
 import { fuzzyScore } from './fuzzy';
 import { levenshtein } from './levenshtein';
+import { fold } from './normalize';   
 
 export interface Result { line: number; score: number; isComment: boolean; }
 
@@ -10,12 +11,12 @@ const COMMENT_BONUS = 4;
 export class SearchEngine {
   private index: InvertedIndex;
 
-  constructor(readonly lines: string[]) {
-    this.index = new InvertedIndex(tokenize(lines));
+  constructor(readonly lines: string[], languageId = 'plaintext') {
+    this.index = new InvertedIndex(tokenize(lines, languageId));
   }
 
   search(query: string, limit = 50): Result[] {
-    const terms = query.toLowerCase().split(/\s+/).filter(Boolean);
+   const terms = fold(query).split(/\s+/).filter(Boolean);
     if (terms.length === 0) return [];
 
     let acc: Map<number, number> | null = null;

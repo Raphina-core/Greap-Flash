@@ -10,6 +10,6 @@ vsc-extension-quickstart.md
 **/*.ts
 **/.vscode-test.*
 *.vsix
- out/**/*.test.js
+out/**/*.test.js
 out/test/**
 media/**

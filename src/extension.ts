@@ -8,7 +8,7 @@ function getEngine(doc: vscode.TextDocument): SearchEngine {
   const uri = doc.uri.toString();
   if (cache?.uri === uri && cache.version === doc.version) return cache.engine;
   const lines = Array.from({ length: doc.lineCount }, (_, i) => doc.lineAt(i).text);
-  cache = { uri, version: doc.version, engine: new SearchEngine(lines) };
+  cache = { uri, version: doc.version,engine: new SearchEngine(lines, doc.languageId)};
   return cache.engine;
 }
 
