@@ -31,7 +31,7 @@ GreapFlash resuelve ese caso específico: escribes lo que recuerdas, aunque sea 
 
 # Cómo funciona
 
-1. Índice invertido del archivo activo (se actualiza en vivo, con debounce).
+1. Índice invertido del archivo activo (se actualiza en vivo, reindexando el tokenizador con el archivo actual, cargandolo para cada archivo).
 2. Fuzzy matching por subsecuencia (estilo fzf) sobre ese índice.
 3. Ranking que prioriza inicio de palabra, coincidencias consecutivas y coincidencias en comentarios.
 4. Resultados en un QuickPick nativo de VS Code, ordenados por score, actualizándose con cada tecla.
