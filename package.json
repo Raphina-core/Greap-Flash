@@ -3,10 +3,12 @@
   "name": "greapflash",
   "displayName": "GreapFlash",
   "description": "Búsqueda difusa con ranking dentro del archivo activo de VS Code",
-  "version": "1.0.1",
+  "version": "1.0.2",
+  "license": "MIT",
+  "keywords": ["fuzzy", "fzf", "search", "find", "quick open", "neovim", "telescope"],
   "icon": "greapflash-icon.png",
   "engines": {
-    "vscode": "^1.138.0"
+    "vscode": "^1.85.0"
   },
   "categories": [
     "Other"
@@ -27,12 +29,13 @@
     "watch": "tsc -watch -p ./",
     "pretest": "npm run compile && npm run lint",
     "lint": "eslint src",
-    "test": "vscode-test"
+    "test": "vscode-test",
+    "test:core": "npm run compile && node --test \"out/search/*.test.js\""
   },
   "devDependencies": {
-    "@types/vscode": "^1.138.0",
+    "@types/vscode": "1.85.0",
     "@types/mocha": "^10.0.10",
-    "@types/node": "24.x",
+    "@types/node": "18.x",
     "typescript-eslint": "^8.61.1",
     "eslint": "^10.5.0",
     "typescript": "^6.0.3",
