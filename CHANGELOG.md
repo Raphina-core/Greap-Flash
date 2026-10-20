@@ -4,6 +4,31 @@ Todos los cambios importantes de la extensión "greapflash" se documentan en est
 
 El formato sigue [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/).
 
+## [1.1.1] - 2026-10-20
+
+### Agregado
+- Botón **GreapFlash** en la barra de estado para abrir el buscador sin recordar el atajo. Se puede ocultar con el ajuste `greapflash.showStatusBarButton`.
+- Botón con un rayo en la barra superior del editor.
+- Aviso visible de que el buscador está activo: la barra de estado se pone amarilla con el texto "GreapFlash activo".
+- El título del buscador muestra lo que escribes y el número de resultados.
+- Título animado con uvas y rayo. Se puede apagar con el ajuste `greapflash.animateTitle`.
+- Íconos de color para distinguir los comentarios (verde) del código (azul).
+- Resaltado en el editor de la línea que estás previsualizando y de las letras que coinciden con tu búsqueda.
+- Destello amarillo que se desvanece al saltar a una línea con Enter.
+- Botones de pegar y de borrar la búsqueda, y un botón con el logo, en la barra del título del buscador.
+- Ahora se muestran hasta 100 resultados (antes 50).
+
+### Cambiado
+- Al cancelar con Esc, vuelven el cursor y también la posición de la pantalla (scroll) donde estabas.
+- Al saltar a una línea, el cursor queda en el primer carácter que no es un espacio.
+- Las líneas muy largas se recortan a 160 caracteres en la lista, y el texto `$(` dentro del código ya no se interpreta como un ícono.
+- La extensión se activa al terminar de iniciar VS Code (`onStartupFinished`) para poder mostrar el botón de la barra de estado. La búsqueda en sí solo se ejecuta cuando la invocas.
+
+### Limitaciones conocidas
+- No busca símbolos como `=>` o `};`.
+- No encuentra frases ni comentarios partidos en varias líneas.
+- Los strings de varias líneas (como las triples comillas de Python) no se detectan al clasificar comentarios.
+
 ## [1.0.2] - 2026-10-11
 
 ### Agregado

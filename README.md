@@ -1,63 +1,72 @@
-# Greap-Flash
+# GreapFlash
 
-Extensión de VS Code para buscar líneas de código o comentarios en el archivo activo usando búsqueda difusa (fuzzy) con ranking — sin necesitar el texto exacto.
+Búsqueda difusa con ranking dentro del archivo que tienes abierto en VS Code: escribe lo que recuerdes, aunque sea incompleto o tenga errores de dedo, y salta a la línea al instante.
 
-Búsqueda difusa con ranking, directo dentro del archivo que tienes abierto en VS Code — sin scrollear, sin recordar la palabra exacta.
+Funciona en Windows, macOS y Linux, sin instalar nada extra.
 
-Funciona en MacOs, Linux y Windows.
+[![GreapFlash en acción](https://github.com/Raphina-core/Greap-Flash/raw/main/media/demo.gif)](https://github.com/Raphina-core/Greap-Flash/blob/main/media/demo.gif)
 
-![GreapFlash en acción](media/demo.gif)
+## Para qué sirve
 
-# Creador
-Este es un proyecto independiente hecho por Rafael Moreno Velez, es open source (codigo abierto), este proyecto es para hacer una extension en visual studio code, la cual te permita buscar lineas especificas de codigo o comentarios en el archivo en donde estes posicionado, usando o no el nombre correcto de la linea a buscar.
+`Ctrl+F` busca texto literal, y `Ctrl+Shift+F` busca en todo el proyecto. Pero si recuerdas a medias una variable, una función o un comentario perdido en un archivo de miles de líneas, no hay una forma rápida de encontrarlo.
 
-# Desarrollo
+GreapFlash resuelve ese caso: escribes lo que recuerdas y ves en vivo las líneas más probables, ordenadas por relevancia.
 
-Ya existe una version v1.0.2 en el marketplace la cual funciona y esta disponible para su instalacion.
+- Tolera acentos (`funcion` encuentra `función`) y errores de dedo.
+- Encuentra lo que escribas aunque no sean letras seguidas (`calctot` encuentra `calcularTotal`).
+- Distingue comentarios de código con íconos de color.
+- Solo trabaja cuando la invocas: no consume recursos en segundo plano.
 
-En desarrollo activo, aun faltan unas cosas por pulir y documentar, en estas semanas me estare encargando de la aceptacion de simbolos para que la bsuqueda por lineas  de codigo especificas sea mucho mas precisa, y de documentar el software y unos cambios dentro del repositorio de git.
+## Uso
 
-Y de hacer unos cuantos test mas para ver como se comporta dentro de archivos muy grandes.
+1. Abre el buscador de cualquiera de estas formas:
+   - Atajo `Ctrl+Alt+G` (`Cmd+Alt+G` en macOS).
+   - Botón **⚡ GreapFlash** en la barra de estado (abajo a la derecha).
+   - Botón del rayo en la barra superior del editor.
+   - Comando `GreapFlash: Buscar en archivo actual` en la paleta de comandos.
+2. Escribe lo que recuerdes.
+3. Muévete por los resultados con las flechas o con el ratón: el editor te muestra cada línea en vivo.
+4. **Enter** salta a la línea elegida. **Esc** cancela y te devuelve a donde estabas.
 
-# Por qué
+Mientras el buscador está abierto, la barra de estado se pone amarilla con "GreapFlash activo", y el título muestra tu búsqueda y el número de resultados. En la barra del título hay botones para pegar y para borrar la búsqueda.
 
-Aunque se que probablemente hay otras versiones de extensiones de fuera para buscar archivos como lo son Go-fuzzy, o swiper, esta ademas de su ligereza y su poco espacio que ocupa, te permitira buscar dentro de archivos grandes de forma rapida, aunque muy apenas recuerdes las palabras o letras, aparte de que es muy util para ir a comentarios en tu codigo, y lo mejor de todo es que solo se ejecuta si tu solo presionas las teclas vistas en la parte de uso del Read.me o con el comando, por lo que no te estara consumiendo recursos en segundo plano, aparte de que es super ligera y rapida, honestamente yo se que quiza ahi otras alternativas pero algunas como Go-fuzzy solo existen en linux/macos, esta te permitira hacer la busqueda difusa en cualquier sistema operativo en donde tengas visual studio code, de hecho es muy ligera y solo se ejecuta cuando la invocas.
-Esta idea me surgio debido a la necesidad que tenia de que toleraran los buscadores errores de dedo y que buscara en archivos grandes de forma rapida lineas de codigo especificas y comandos, por lo que tiene especial prioridad en estos.
+## Ajustes
 
-Por ejemplo:
-Ctrl+F busca texto literal; Ctrl+Shift+F busca en todo el proyecto pero prioriza mal los resultados en archivos grandes. Si medio recuerdas una palabra de un comentario perdido en un archivo de miles de líneas, hoy no hay una forma rápida de encontrarla.
+| Ajuste | Por defecto | Qué hace |
+|---|---|---|
+| `greapflash.showStatusBarButton` | `true` | Muestra el botón de GreapFlash en la barra de estado |
+| `greapflash.animateTitle` | `true` | Anima el título del buscador con las uvas y el rayo |
 
-GreapFlash resuelve ese caso específico: escribes lo que recuerdas, aunque sea incompleto, y ves en vivo las líneas más probables ordenadas por relevancia.
+## Cómo funciona
 
-# Cómo funciona
+1. Índice invertido del archivo activo, que se reconstruye cuando el archivo cambia.
+2. Búsqueda difusa por subsecuencia (estilo fzf) sobre las palabras únicas del archivo.
+3. Tolerancia a errores de dedo con distancia de Levenshtein y normalización de acentos.
+4. Ranking que prioriza el inicio de palabra, las coincidencias consecutivas y las coincidencias en comentarios.
+5. Resultados en un QuickPick nativo de VS Code, ordenados por relevancia y actualizados con cada tecla.
 
-1. Índice invertido del archivo activo (se actualiza en vivo, reindexando el tokenizador con el archivo actual, cargandolo para cada archivo).
-2. Fuzzy matching por subsecuencia (estilo fzf) sobre ese índice.
-3. Ranking que prioriza inicio de palabra, coincidencias consecutivas y coincidencias en comentarios.
-4. Resultados en un QuickPick nativo de VS Code, ordenados por score, actualizándose con cada tecla.
+## Instalación
 
-# Uso
-
-- `Ctrl+Alt+G` (o el comando `GreapFlash: Buscar en archivo actual` desde la paleta de comandos).
-- Escribe lo que recuerdes.
-- Flechas para navegar, Enter para saltar a la línea.
+- **VS Code:** búscala como "GreapFlash" en el panel de extensiones, o desde el [Marketplace](https://marketplace.visualstudio.com/items?itemName=Raphina-core-12.greapflash).
+- **Cursor, Antigravity y otros editores basados en VS Code:** descarga el archivo `.vsix` desde la sección [Releases](https://github.com/Raphina-core/Greap-Flash/releases) e instálalo con "Extensiones: Instalar desde VSIX…".
 
 ## Roadmap
 
-Lo que aun falta y voy a mejorar.
-- [ ] Búsqueda en workspace completo (no solo archivo activo)
-- [ ] Soporte para PDFs/libros abiertos como texto plano
-- [X] Publicación en el Marketplace
+- [x] Publicación en el Marketplace de VS Code
+- [x] Botón en la barra de estado y aviso visual de que está activa
+- [ ] Búsqueda de símbolos como `=>` o `};`
+- [ ] Comentarios y frases partidos en varias líneas
+- [ ] Búsqueda en todo el proyecto (no solo en el archivo activo)
+- [ ] Soporte para PDFs o libros abiertos como texto plano
+- [ ] Interfaz opcional con temas de color
 
-## Limitaciones actuales del proyecto
+## Limitaciones actuales
 
-Actualmente y a dia de hoy que este viendo esto, aun ahi unas cosas que faltan por resolver como la busqueda por simbolos como =>
-, ni tampoco busca frases o comentarios partidos en varias lineas, esto llegara en un futuro, eso es un hecho.
+- No busca símbolos como `=>` o `};`.
+- No encuentra frases ni comentarios partidos en varias líneas.
+- Los strings de varias líneas (como las triples comillas de Python) no se detectan al clasificar comentarios.
 
-## Instalar y desarrollar
-
-Url del repositorio de GitHub (Proyecto):
-https://github.com/Raphina-core/Greap-Flash.git
+## Desarrollo
 
 ```bash
 git clone https://github.com/Raphina-core/Greap-Flash.git
@@ -65,18 +74,22 @@ cd Greap-Flash
 npm install
 npm run compile
 ```
-Presiona F5 en VS Code para probar en un Extension Development Host.
 
-## Creditos
+Pulsa **F5** en VS Code para probarla en una ventana de desarrollo (Extension Development Host). Para correr los tests del motor de búsqueda: `npm run test:core`.
 
-<a href="https://www.flaticon.es/iconos-gratis/uva" title="uva iconos">Uva iconos creados por Magnific - Flaticon</a>
+## Acerca del proyecto
 
-<a href="https://www.flaticon.es/iconos-gratis/rayo" title="rayo iconos">Rayo iconos creados por Febrian Hidayat - Flaticon</a>
+GreapFlash es un proyecto independiente y de código abierto, creado por Rafael Moreno Velez. Nació de una necesidad real: encontrar líneas y comentarios en un frontend de más de 3500 líneas sin recordar el texto exacto.
 
-Muchas gracias a los de Flaticon, por permitirme usar sus iconos en mi logo.
+Se desarrolló con apoyo de herramientas de IA (código, razonamiento y documentación). La idea, el nombre, el logo, la arquitectura elegida y la revisión final son del autor.
+
+## Créditos
+
+- [Uva iconos creados por Magnific - Flaticon](https://www.flaticon.es/iconos-gratis/uva "uva iconos")
+- [Rayo iconos creados por Febrian Hidayat - Flaticon](https://www.flaticon.es/iconos-gratis/rayo "rayo iconos")
+
+Gracias a Flaticon por permitir usar sus iconos en el logo.
 
 ## Licencia
 
-MIT License — texto completo en LICENSE, en la raíz del proyecto.
-
-
+MIT. El texto completo está en el archivo `LICENSE`, en la raíz del proyecto.
